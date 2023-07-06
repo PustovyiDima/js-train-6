@@ -210,8 +210,14 @@ let product = {
 function printProductDetails(obj) {
    // Використовуємо деструктуризацію для отримання значень productName, price i також значень companyName, country вкладеного об'єкту manufacturer
    // Виводимо productName, price, companyName та country на консоль
-   let { productName, price, manufacturer } = obj;
-   let { companyName, country } = manufacturer;
+   //  const { productName, price, manufacturer } = obj;
+   //  const { companyName, country } = manufacturer;
+   const {
+      productName,
+      price,
+      manufacturer: { companyName, country },
+   } = obj;
+
    console.log(productName, price, companyName, country);
 }
 
@@ -247,7 +253,11 @@ let car = {
 // Створюємо функцію, яка приймає об'єкт як аргумент і використовує деструктуризацію зі значенням за замовчуванням
 // brand за замовчуванням призначемо Unknown, year за замовчуванням призначемо 0, country за замовчуванням призначемо Unknown
 
-function showCarInfo({ brand = "Unknown", year = 0, country = "Unknown" }) {
+function showCarInfo({
+   brand = "Unknown",
+   year = 0,
+   country = "Unknown",
+} = {}) {
    // Повертаємо об'єкт зі значеннями властивостей
    return { brand, year, country };
 }
@@ -260,12 +270,12 @@ console.log(showCarInfo(car)); // Виведе { brand: 'BMW', year: 2022, count
 function addProperty(array) {
    // Додаємо нову властивість customProperty до прототипу Array зі значенням myProperty
    // Повертаємо переданий масив з новою властивістю
-   array.prototype.customProperty = "myProperty";
+   Array.prototype.customProperty = "myProperty";
    return array;
 }
 
 console.log("Завдання 14 ====================================");
 // Створимо масив newArr з новою властивістю за допомогої нашої функції в яку передамо [1, 2, 3, 4, 5]
-
+let newArr = addProperty([1, 2, 3, 4, 5]);
 // Розкоментуйте рядок нижче після виконня завдання для перевірки
-//console.log(newArr.customProperty); // Виведе myProperty
+console.log(newArr.customProperty); // Виведе myProperty
